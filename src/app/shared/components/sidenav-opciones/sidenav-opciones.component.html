@@ -1,0 +1,30 @@
+<div class="sidenav-header">
+    <img 
+    src="https://st.depositphotos.com/1995655/1928/i/450/depositphotos_19282897-stock-photo-empty-gas-station-at-night.jpg" 
+    alt="" 
+    [width]="imagenPerfilTamano()"
+    [height]="imagenPerfilTamano()">
+    
+    <div class="header-text" [class.hide-header-text]="sideNavCollapsado()">
+        <h2>Estación de Servicio</h2>
+        <p>Norte</p>
+    </div>
+</div>
+<mat-nav-list>
+    <a mat-list-item 
+    class="menu-item"
+    *ngFor="let item of menuItems()" 
+    [routerLink]="item.route"
+    routerLinkActive="selected-menu-item "
+    #rla="routerLinkActive"
+    [activated]="rla.isActive"
+    >
+        <mat-icon class="colorred" [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'" matListItemIcon>{{item.icon}}</mat-icon>
+        <span matListItemTitle *ngIf="!sideNavCollapsado()">{{item.label}}</span>
+    </a>
+
+    <a mat-list-item  class="menu-item" (click)="cerrarSesion()">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle >Salir</span>
+    </a>
+</mat-nav-list>
