@@ -4,17 +4,11 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/subsidio-taxis-web",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }
