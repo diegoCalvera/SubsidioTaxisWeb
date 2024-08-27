@@ -1,1 +1,14 @@
-<p>recarga works!</p>
+<form  [formGroup]="formRecarga" (ngSubmit)="buscar()">
+    <div class="row">
+        <div class="col-sm">
+            <mat-form-field appearance="outline">
+                <mat-label>Placa</mat-label>
+                <input matInput formControlName="placa">
+            </mat-form-field>
+        </div>
+
+        <div class="col-sm">
+            <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
+        </div>    
+    </div>
+</form>

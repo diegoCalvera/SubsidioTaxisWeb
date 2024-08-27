@@ -47,6 +47,16 @@ export class SidenavOpcionesComponent {
       label: 'Parametrización',
       route: 'parametrizacion'
     },
+    {
+      icon: 'notifications',
+      label: 'Alertas',
+      route: 'alerta'
+    },
+    {
+      icon: 'flag',
+      label: 'Reportes',
+      route: 'reporte'
+    },
     /*{
       icon: 'logout',
       label: 'Salir',

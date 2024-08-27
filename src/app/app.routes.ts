@@ -23,6 +23,14 @@ export const routes: Routes = [
             {
                 path : 'parametrizacion',
                 loadComponent : () => import('./dashboard/pages/parametrizacion/parametrizacion.component').then(l => l.ParametrizacionComponent)
+            },
+            {
+                path : 'alerta',
+                loadComponent : () => import('./dashboard/pages/alerta/alerta.component').then(l => l.AlertaComponent)
+            },
+            {
+                path : 'reporte',
+                loadComponent : () => import('./dashboard/pages/reporte/reporte.component').then(l => l.ReporteComponent)
             }
         ]
     },
