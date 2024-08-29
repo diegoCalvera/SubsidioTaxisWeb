@@ -49,8 +49,8 @@ export class SidenavOpcionesComponent {
     },
     {
       icon: 'notifications',
-      label: 'Alertas',
-      route: 'alerta'
+      label: 'Transacciones',
+      route: 'transacciones'
     },
     {
       icon: 'flag',
