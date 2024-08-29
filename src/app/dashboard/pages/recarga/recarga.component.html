@@ -1,14 +1,133 @@
-<form  [formGroup]="formRecarga" (ngSubmit)="buscar()">
+<form [formGroup]="formPlaca" (ngSubmit)="buscar()">
     <div class="row">
-        <div class="col-sm">
+        <div class="col-sm ">
             <mat-form-field appearance="outline">
                 <mat-label>Placa</mat-label>
                 <input matInput formControlName="placa">
             </mat-form-field>
+            <br>
+            <button mat-raised-button color="primary" [disabled]="!formPlaca.valid">Buscar</button>
         </div>
 
-        <div class="col-sm">
-            <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
-        </div>    
     </div>
 </form>
+<br>
+@if(encuentraInfomacionConPlaca){
+<mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Información Personal
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col">
+                <div class="sidenav-header">
+                    <img 
+                    src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/X2GNENXY3FHJVAREHBBK63KMKE.jpg" 
+                    alt="" 
+                    [width]="150"
+                    [height]="150">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-4">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"
+                        class="with-icon"></mat-icon> <span class="informacion">{{taxista?.nombre | uppercase}}
+                        {{taxista?.apellido | uppercase}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="badge"></mat-icon><span
+                        class="informacion">{{taxista?.cedula}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="smartphone"></mat-icon> <span
+                        class="informacion">{{taxista?.celular}}</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12 col-lg-4">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="alternate_email"
+                        class="with-icon"></mat-icon> <span class="informacion">{{taxista?.correo}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> <span
+                        class="informacion">{{taxista?.direccion | uppercase}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="apartment"></mat-icon> <span
+                        class="informacion">{{taxista?.empresa | uppercase}}</span>
+                </div>
+            </div>
+
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Subsidio
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        
+        <div class="row">
+            <div class="col-md-12 col-lg-3">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="local_taxi"
+                        class="with-icon"></mat-icon> <span class="informacion">{{taxi?.marca}} {{taxi?.vehiculo}}
+                        {{taxi?.placa}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="start-rate-half"></mat-icon>
+                    <span class="informacion">Cilindraje : {{taxi?.cilindraje | uppercase}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="check-small"></mat-icon>
+                    <span class="informacion">Modelo : {{taxi?.modelo | uppercase}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <div class="with-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="paid"></mat-icon>
+                    <span class="informacion"> Subsidio : {{taxi?.subsidio | currency}}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+        <div class="row">
+            <form [formGroup]="formRecarga" (ngSubmit)="recargar()">
+                <div class="col-sm">
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label>Valor a recargar</mat-label>
+                        <input matInput formControlName="valor" type="number" class="example-right-align" placeholder="0">
+                        <span matTextPrefix>$&nbsp;</span>
+                        <span matTextSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <button mat-raised-button color="primary" [disabled]="!formRecarga.valid">Recargar</button>
+                </div>
+            </form>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+}

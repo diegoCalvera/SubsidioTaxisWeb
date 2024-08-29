@@ -1,4 +1,6 @@
 export enum FIRESTORE_TABLES {
-    TAXISTA = "taxista"
+    TAXISTA = "taxista",
+    USUARIO = "usuarios",
+    TAXI = "taxi"
 }
 

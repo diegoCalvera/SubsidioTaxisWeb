@@ -1,14 +1,11 @@
 export interface Taxista {
-    id:                string;
-    primer_nombre:     string;
-    celular:           string;
-    primer_apellido:   string;
-    segundo_nombre:    string;
-    segundo_apellido:  string;
-    documento:         string;
-    barrio:            string;
-    mostrar_foto:      boolean;
-    direccion:         string;
-    tipo_documento_id: string;
-    activo:            boolean;
+    id: string;
+    nombre: string;
+    apellido: string;
+    celular: string;
+    cedula: string;
+    correo: string;
+    placa_taxi: string;
+    direccion: string;
+    empresa: string;
 }
