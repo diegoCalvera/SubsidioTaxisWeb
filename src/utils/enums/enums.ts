@@ -3,4 +3,5 @@ export enum FIRESTORE_TABLES {
   USUARIO = 'usuarios',
   TAXI = 'taxi',
   TRANSACCIONES = 'transacciones',
+  PARAMETRIZACION = 'parametrizacion',
 }

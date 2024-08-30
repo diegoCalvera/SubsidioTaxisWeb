@@ -1,27 +1,44 @@
 .license-plate {
-    margin-top: 2px;
-    display: inline-block;
-    background-color: #ffd700; /* Color de fondo amarillo */
-    border: 2px solid black; /* Borde negro */
-    color: black;
-    font-family: "Arial Black", sans-serif;
-    font-size: 14px;
-    padding: 2px 4px;
-    border-radius: 6px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+  margin-top: 15px;
+  display: inline-block;
+  background-color: #ffd700; /* Color de fondo amarillo */
+  border: 2px solid black; /* Borde negro */
+  color: black;
+  font-family: "Arial Black", sans-serif;
+  font-size: 14px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.table {
+  align-self: center;
+  max-width: 70rem;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  h3 {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+      sans-serif;
+    font-weight: lighter;
+    font-size: 2rem;
   }
-  
-  table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
+}

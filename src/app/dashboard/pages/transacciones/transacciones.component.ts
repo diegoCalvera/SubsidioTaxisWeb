@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ViewChild, inject } from '@angular/core';
+import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
-import { TransaccionesService } from '../../../services/transacciones.service';
-import { Transaccion } from '../../../model/transaccionesDTO';
-import { MatRippleModule } from '@angular/material/core';
 import { RouterLink } from '@angular/router';
+import { Transaccion } from '../../../model/transaccionesDTO';
+import { TransaccionesService } from '../../../services/transacciones.service';
 
 @Component({
   selector: 'app-transacciones',
@@ -21,20 +21,25 @@ import { RouterLink } from '@angular/router';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatRippleModule
+    MatRippleModule,
   ],
   templateUrl: './transacciones.component.html',
-  styleUrl: './transacciones.component.css'
+  styleUrl: './transacciones.component.css',
 })
 export class TransaccionesComponent {
-
   //Servicios inyectados.
   transaccionesServicio: TransaccionesService = inject(TransaccionesService);
 
-  //Variables 
+  //Variables
   listaTransacciones!: Transaccion[];
 
-  displayedColumns: string[] = ['placa', 'tipo_transaccion', 'valor', 'estacion','timestamp'];
+  displayedColumns: string[] = [
+    'placa',
+    'tipo_transaccion',
+    'valor',
+    'estacion',
+    'timestamp',
+  ];
   dataSource!: MatTableDataSource<Transaccion>;
 
   centered = false;
@@ -43,7 +48,6 @@ export class TransaccionesComponent {
 
   radius!: number;
   color!: string;
-
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -56,19 +60,9 @@ export class TransaccionesComponent {
         this.listaTransacciones = this.listaTransacciones.sort(function (a, b) {
           return b.timestamp.seconds - a.timestamp.seconds;
         });
-        console.log(this.listaTransacciones);
-        // Assign the data to the data source for the table to render
         this.dataSource = new MatTableDataSource(this.listaTransacciones);
       },
-      error: (e) => {
-        //console.log('Error al obtener las pesonas');
-      },
-      complete: () => {
-        //console.log('Tarea realizada');
-      }
     });
-
-    //this.dataSource = new MatTableDataSource(this.listaPersonas);
   }
 
   ngAfterViewInit() {
@@ -84,9 +78,4 @@ export class TransaccionesComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  redireccionar(transaccion : Transaccion) {
-    console.log(":)");
-  }
-
 }

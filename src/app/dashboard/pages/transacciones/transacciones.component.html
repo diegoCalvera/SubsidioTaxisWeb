@@ -1,55 +1,66 @@
 @if(listaTransacciones){
-<mat-form-field>
-    <mat-label>Filtrar</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: WWW000" #input>
-</mat-form-field>
+<section class="title">
+    <h3>Historial de transacciones</h3>
+</section>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <mat-form-field>
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: WWW000" #input>
+        </mat-form-field>
 
-<div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+        <div class="mat-elevation-z5">
+            <table mat-table [dataSource]="dataSource">
 
-        <!--Columna Placa-->
-        <ng-container matColumnDef="placa">
-            <th mat-header-cell *matHeaderCellDef> Placa </th>
-            <td mat-cell *matCellDef="let row" (click)="redireccionar(row)">
-                <div class="license-plate">{{row.placa}}</div>
-            </td>
-        </ng-container>
+                <!--Columna Placa-->
+                <ng-container matColumnDef="placa">
+                    <th mat-header-cell *matHeaderCellDef> Placa </th>
+                    <td mat-cell *matCellDef="let row">
+                        <span class="license-plate">{{row.placa}}</span>
+                    </td>
+                </ng-container>
 
-        <!-- Columna Tipo Transacciones-->
-        <ng-container matColumnDef="tipo_transaccion">
-            <th mat-header-cell *matHeaderCellDef> Tipo Transacción </th>
-            <td mat-cell *matCellDef="let row" (click)="redireccionar(row)"> {{row.tipo_transaccion}}</td>
-        </ng-container>
+                <!-- Columna Tipo Transacciones-->
+                <ng-container matColumnDef="tipo_transaccion">
+                    <th mat-header-cell *matHeaderCellDef> Tipo Transacción </th>
+                    <td mat-cell *matCellDef="let row"> {{row.tipo_transaccion}}</td>
+                </ng-container>
 
 
-        <!-- Columna Valor -->
-        <ng-container matColumnDef="valor">
-            <th mat-header-cell *matHeaderCellDef> Valor </th>
-            <td mat-cell *matCellDef="let row" (click)="redireccionar(row)">
-                <h5 [ngClass]="row.valor > 0 ? 'badge text-bg-success' : 'badge text-bg-danger'">{{row.valor |
-                    currency}}</h5>
-            </td>
-        </ng-container>
+                <!-- Columna Valor -->
+                <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef> Valor </th>
+                    <td mat-cell *matCellDef="let row">
+                        <h5 [ngClass]="row.valor > 0 ? 'text-success' : 'text-danger'">
+                            <strong> {{row.valor | currency}} </strong>
+                        </h5>
+                    </td>
+                </ng-container>
 
-        <!-- Columna Valor -->
-        <ng-container matColumnDef="estacion">
-            <th mat-header-cell *matHeaderCellDef>Estación</th>
-            <td mat-cell *matCellDef="let row" (click)="redireccionar(row)"> {{row.estacion}} </td>
-        </ng-container>
-        <!-- Columna timestamp -->
-        <ng-container matColumnDef="timestamp">
-            <th mat-header-cell *matHeaderCellDef> Fecha </th>
-            <td mat-cell *matCellDef="let row" (click)="redireccionar(row)">  {{row.timestamp.toDate() | date:"dd/MM/yyyyHH:mm" }} </td>
-        </ng-container>
+                <!-- Columna Valor -->
+                <ng-container matColumnDef="estacion">
+                    <th mat-header-cell *matHeaderCellDef>Estación</th>
+                    <td mat-cell *matCellDef="let row"> {{row.estacion}} </td>
+                </ng-container>
+                <!-- Columna timestamp -->
+                <ng-container matColumnDef="timestamp">
+                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                    <td mat-cell *matCellDef="let row"> {{row.timestamp.toDate() |
+                        date:"dd/MM/yyyyHH:mm" }} </td>
+                </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-        <!--Cuando no existe registros correspondientes al filtro-->
-        <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No un registro válido 🤔 "{{input.value}}"</td>
-        </tr>
-    </table>
+                <!--Cuando no existe registros correspondientes al filtro-->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No un registro válido 🤔 "{{input.value}}"</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-2"></div>
 </div>
 } @else{
 <div class="contenedor">

@@ -1,38 +1,82 @@
-<form action="" [formGroup]="formPersona" >
-<div class="row">
-    <div class="row mt-3">
-        <div class="col-sm">
-            <mat-form-field appearance="outline">
-                <mat-label>Tipo Documento</mat-label>
-                <mat-select formControlName="tipo_documento_id">
-                    @for (item of tiposDocumento; track $index) {
-                    <mat-option [value]="item.id">{{ item.descripcion }}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-        </div>   
-        
-        <div class="col-sm">
-            <mat-form-field appearance="outline">
-                <mat-label>Tipo Documento</mat-label>
-                <mat-select formControlName="tipo_documento_id">
-                    @for (item of tiposDocumento; track $index) {
-                    <mat-option [value]="item.id">{{ item.descripcion }}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-        </div>  
+<section class="title">
+    <h3>Parametrización de datos de vehículos</h3>
+</section>
+<form class="formParametrizacion" action="" [formGroup]="formParametrizacion">
+    <div class="row">
+        <div class="row mt-3">
+            <div class="col-sm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Modelo desde:</mat-label>
+                    <mat-select formControlName="modelo_desde">
+                        @for (item of modelo; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Modelo hasta:</mat-label>
+                    <mat-select formControlName="modelo_hasta">
+                        @for (item of modelo; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
 
-        <div class="col-sm">
-            <mat-form-field appearance="outline">
-                <mat-label>Tipo Documento</mat-label>
-                <mat-select formControlName="tipo_documento_id">
-                    @for (item of tiposDocumento; track $index) {
-                    <mat-option [value]="item.id">{{ item.descripcion }}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-        </div>  
+            <div class="col-sm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Clase de servicio</mat-label>
+                    <mat-select formControlName="clase">
+                        @for (item of clase; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Cilindraje desde:</mat-label>
+                    <mat-select formControlName="cilindraje_desde">
+                        @for (item of cilindraje; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Cilindraje hasta:</mat-label>
+                    <mat-select formControlName="cilindraje_hasta">
+                        @for (item of cilindraje; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="row mt-3">
+            <div class="col-sm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipo vehículo</mat-label>
+                    <mat-select formControlName="tipo_vehiculo">
+                        @for (item of tipo_vehiculo; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-sm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Combustible</mat-label>
+                    <mat-select formControlName="combustible">
+                        @for (item of tipo_copmbustible; track $index) {
+                        <mat-option [value]="item.value">{{ item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="parametrizar()">Parametrizar</button>
 </form>

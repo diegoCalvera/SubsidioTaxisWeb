@@ -1,3 +1,6 @@
+<section class="title">
+    <h3>Recarga de subsidio a vehículos</h3>
+</section>
 <form [formGroup]="formPlaca" (ngSubmit)="buscar()">
     <div class="row">
         <div class="col-sm ">
@@ -23,11 +26,7 @@
         <div class="row">
             <div class="col">
                 <div class="sidenav-header">
-                    <img 
-                    src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/X2GNENXY3FHJVAREHBBK63KMKE.jpg" 
-                    alt="" 
-                    [width]="150"
-                    [height]="150">
+                    <img src="./assets/taxista.jpg" alt="" [width]="150" [height]="150">
                 </div>
             </div>
         </div>
@@ -81,7 +80,7 @@
                 Subsidio
             </mat-panel-title>
         </mat-expansion-panel-header>
-        
+
         <div class="row">
             <div class="col-md-12 col-lg-3">
                 <div class="with-icon">
@@ -118,7 +117,8 @@
                 <div class="col-sm">
                     <mat-form-field appearance="outline" floatLabel="always">
                         <mat-label>Valor a recargar</mat-label>
-                        <input matInput formControlName="valor" type="number" class="example-right-align" placeholder="0">
+                        <input matInput formControlName="valor" type="number" class="example-right-align"
+                            placeholder="0">
                         <span matTextPrefix>$&nbsp;</span>
                         <span matTextSuffix>.00</span>
                     </mat-form-field>
