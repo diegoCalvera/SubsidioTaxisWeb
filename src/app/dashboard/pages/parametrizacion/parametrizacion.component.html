@@ -1,1 +1,38 @@
-<p>parametrizacion works!</p>
+<form action="" [formGroup]="formPersona" >
+<div class="row">
+    <div class="row mt-3">
+        <div class="col-sm">
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo Documento</mat-label>
+                <mat-select formControlName="tipo_documento_id">
+                    @for (item of tiposDocumento; track $index) {
+                    <mat-option [value]="item.id">{{ item.descripcion }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>   
+        
+        <div class="col-sm">
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo Documento</mat-label>
+                <mat-select formControlName="tipo_documento_id">
+                    @for (item of tiposDocumento; track $index) {
+                    <mat-option [value]="item.id">{{ item.descripcion }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>  
+
+        <div class="col-sm">
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo Documento</mat-label>
+                <mat-select formControlName="tipo_documento_id">
+                    @for (item of tiposDocumento; track $index) {
+                    <mat-option [value]="item.id">{{ item.descripcion }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>  
+    </div>
+</div>
+</form>
