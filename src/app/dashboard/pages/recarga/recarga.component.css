@@ -21,13 +21,12 @@ input.example-right-align {
 }
 
 .sidenav-header {
-  padding-top: 24px;
   text-align: center;
 
   > img {
     border-radius: 100%;
     object-fit: cover;
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
   }
 }
 
@@ -40,4 +39,11 @@ input.example-right-align {
     font-weight: lighter;
     font-size: 2rem;
   }
+}
+
+.info-taxi-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }

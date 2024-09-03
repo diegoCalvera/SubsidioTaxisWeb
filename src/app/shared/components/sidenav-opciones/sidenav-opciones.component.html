@@ -1,30 +1,22 @@
 <div class="sidenav-header">
-    <img 
-    src="https://pbs.twimg.com/profile_images/1815358841409708032/R1knA4Q8_400x400.jpg" 
-    alt="" 
-    [width]="imagenPerfilTamano()"
-    [height]="imagenPerfilTamano()">
-    
+    <img src="https://pbs.twimg.com/profile_images/1815358841409708032/R1knA4Q8_400x400.jpg" alt=""
+        [width]="imagenPerfilTamano()" [height]="imagenPerfilTamano()">
+
     <div class="header-text" [class.hide-header-text]="sideNavCollapsado()">
         <h2>Ministerio de Transporte</h2>
-        <p>Subsidio Taxis</p>
+        <p>Subsidio Combustible</p>
     </div>
 </div>
 <mat-nav-list>
-    <a mat-list-item 
-    class="menu-item"
-    *ngFor="let item of menuItems()" 
-    [routerLink]="item.route"
-    routerLinkActive="selected-menu-item "
-    #rla="routerLinkActive"
-    [activated]="rla.isActive"
-    >
-        <mat-icon class="colorred" [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'" matListItemIcon>{{item.icon}}</mat-icon>
+    <a mat-list-item class="menu-item" *ngFor="let item of menuItems()" [routerLink]="item.route"
+        routerLinkActive="selected-menu-item " #rla="routerLinkActive" [activated]="rla.isActive">
+        <mat-icon class="colorred" [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'"
+            matListItemIcon>{{item.icon}}</mat-icon>
         <span matListItemTitle *ngIf="!sideNavCollapsado()">{{item.label}}</span>
     </a>
 
-    <a mat-list-item  class="menu-item" (click)="cerrarSesion()">
+    <a mat-list-item class="menu-item" (click)="cerrarSesion()">
         <mat-icon matListItemIcon>logout</mat-icon>
-        <span matListItemTitle >Salir</span>
+        <span matListItemTitle>Salir</span>
     </a>
 </mat-nav-list>

@@ -1,25 +1,24 @@
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { Component, inject } from '@angular/core';
-import { TaxistaService } from '../../../services/taxista.service';
 import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, inject } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TaxiService } from '../../../services/taxi.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import Swal from 'sweetalert2';
+import { InfoTaxi } from '../../../model/info-taxi';
 import { Taxi } from '../../../model/taxiDTO';
 import { Taxista } from '../../../model/TaxistaDTO';
-import Swal from 'sweetalert2';
 import { Transacciones } from '../../../model/transacciones';
+import { TaxiService } from '../../../services/taxi.service';
+import { TaxistaService } from '../../../services/taxista.service';
 
 @Component({
   selector: 'app-recarga',
@@ -43,12 +42,15 @@ export class RecargaComponent {
   taxistaService: TaxistaService = inject(TaxistaService);
   taxiService: TaxiService = inject(TaxiService);
 
-  formPlaca!: FormGroup;
+  formPlaca = new FormGroup({
+    placa: new FormControl('', [Validators.required]),
+  });
   formRecarga!: FormGroup;
 
   encuentraInfomacionConPlaca: boolean = false;
   taxi: Taxi | null = null;
   taxista: Taxista | null = null;
+  info_taxi: InfoTaxi | null = null;
 
   ngOnInit() {
     //this.taxistaService.testGet().subscribe(e => console.log(e));
@@ -64,6 +66,17 @@ export class RecargaComponent {
         next: (t) => {
           this.encuentraInfomacionConPlaca = t != null ? true : false;
           this.taxista = t;
+        },
+        error: (e) => {},
+      });
+
+    this.taxistaService
+      .getInfoTaxi('placa', this.placaControl.value)
+      .subscribe({
+        next: (t) => {
+          console.log(t);
+
+          this.info_taxi = t[0];
         },
         error: (e) => {},
       });
@@ -96,7 +109,29 @@ export class RecargaComponent {
     });
   }
 
+  validacionRecarga(infoTaxi: InfoTaxi) {
+    if (
+      infoTaxi.activo &&
+      infoTaxi.poliza &&
+      infoTaxi.soat &&
+      infoTaxi.rtm &&
+      infoTaxi.tarjeta_operacion
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   recargar() {
+    if (!this.validacionRecarga(this.info_taxi!)) {
+      Swal.fire({
+        title: 'Vehículo no habilitado',
+        text: ' El vehículo no cumple con los requisitos para realizar una recarga',
+        icon: 'info',
+      });
+      return;
+    }
     let transaccion: Transacciones = {
       estacion: '',
       placa: this.placaControl.value,

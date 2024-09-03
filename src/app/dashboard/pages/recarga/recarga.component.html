@@ -107,7 +107,46 @@
                     <span class="informacion"> Subsidio : {{taxi?.subsidio | currency}}</span>
                 </div>
             </div>
-
+        </div>
+        <div class="row info-taxi-section">
+            <div class="col-md-12 col-lg-2">
+                <div class="with-icon">
+                    <span class="informacion" [ngClass]="info_taxi?.soat ? 'text-success' : 'text-danger'"><strong>
+                            SOAT:</strong> {{info_taxi?.soat ? 'Vigente' : 'No Vigente'}}
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-2">
+                <div class="with-icon">
+                    <span class="informacion"
+                        [ngClass]="info_taxi?.rtm ? 'text-success' : 'text-danger'"><strong>RTM:</strong>
+                        {{info_taxi?.rtm ? 'Vigente' : 'No Vigente'}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-2">
+                <div class="with-icon">
+                    <span class="informacion"
+                        [ngClass]="info_taxi?.poliza ? 'text-success' : 'text-danger'"><strong>POLIZA:</strong>
+                        {{info_taxi?.poliza ? 'Vigente' : 'No
+                        Vigente'}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-2">
+                <div class="with-icon">
+                    <span class="informacion"
+                        [ngClass]="info_taxi?.tarjeta_operacion ? 'text-success' : 'text-danger'"><strong>T.O.:</strong>
+                        {{info_taxi?.tarjeta_operacion ? 'Vigente' : 'No
+                        Vigente'}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-2">
+                <div class="with-icon">
+                    <span class="informacion"
+                        [ngClass]="info_taxi?.activo ? 'text-success' : 'text-danger'"><strong>ESTADO:</strong>
+                        {{info_taxi?.activo ? 'Activo' :
+                        'Inactivo'}}</span>
+                </div>
+            </div>
         </div>
 
         <br>
