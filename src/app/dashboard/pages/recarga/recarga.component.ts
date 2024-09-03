@@ -163,6 +163,14 @@ export class RecargaComponent {
     }
   }
 
+  transformToUppercase() {
+    const placaControl = this.formPlaca.get('placa');
+    if (placaControl) {
+      const value = placaControl.value!.toUpperCase();
+      placaControl.setValue(value, { emitEvent: false });
+    }
+  }
+
   get placaControl(): FormControl {
     return this.formPlaca.get('placa') as FormControl;
   }

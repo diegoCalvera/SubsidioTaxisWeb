@@ -6,7 +6,7 @@
         <div class="col-sm ">
             <mat-form-field appearance="outline">
                 <mat-label>Placa</mat-label>
-                <input matInput formControlName="placa">
+                <input matInput formControlName="placa" [maxlength]="8" (keyup)="transformToUppercase()" />
             </mat-form-field>
             <br>
             <button mat-raised-button color="primary" [disabled]="!formPlaca.valid">Buscar</button>
