@@ -3,8 +3,10 @@ import { collectionData, Firestore } from '@angular/fire/firestore';
 import {
   collection,
   CollectionReference,
+  doc,
   DocumentData,
   query,
+  setDoc,
   where,
 } from 'firebase/firestore';
 import { map, Observable } from 'rxjs';
@@ -41,5 +43,13 @@ export class TaxistaService {
   getInfoTaxi(campo: string, valor: any): Observable<InfoTaxi[]> {
     const usuario = query(this.infoTaxiRef, where(campo, '==', valor));
     return collectionData(usuario, { idField: 'id' }) as Observable<InfoTaxi[]>;
+  }
+
+  registrarTaxiConId(taxista: Taxista) {
+    return setDoc(doc(this.firestore, FIRESTORE_TABLES.TAXISTA, taxista.id), taxista);
+  }
+
+  registrarTaxiInfoConId(taxi_info: any) {
+    return setDoc(doc(this.firestore, FIRESTORE_TABLES.INFO_TAXI, taxi_info.id), taxi_info);
   }
 }

@@ -6,6 +6,7 @@ import {
   doc,
   DocumentData,
   query,
+  setDoc,
   updateDoc,
   where,
 } from 'firebase/firestore';
@@ -49,5 +50,9 @@ export class TaxiService {
       collection(this.firestore, FIRESTORE_TABLES.TRANSACCIONES),
       transaccion
     );
+  }
+
+  registrarTaxiConId(taxi: Taxi) {
+    return setDoc(doc(this.firestore, FIRESTORE_TABLES.TAXI, taxi.id), taxi);
   }
 }

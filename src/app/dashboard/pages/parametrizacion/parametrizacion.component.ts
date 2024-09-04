@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -18,6 +18,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import Swal from 'sweetalert2';
 import { Parametrizacion } from '../../../model/parametrizacion';
 import { ParametrizacionService } from '../../../services/parametrizacion.service';
+import { Taxista } from '../../../model/TaxistaDTO';
+import { Taxi } from '../../../model/taxiDTO';
+import { TaxistaService } from '../../../services/taxista.service';
+import { TaxiService } from '../../../services/taxi.service';
+
 
 @Component({
   selector: 'app-parametrizacion',
@@ -39,6 +44,10 @@ import { ParametrizacionService } from '../../../services/parametrizacion.servic
   styleUrl: './parametrizacion.component.css',
 })
 export class ParametrizacionComponent {
+
+  taxistaService: TaxistaService = inject(TaxistaService);
+  taxiService: TaxiService = inject(TaxiService);
+
   idDocSeleccionado: string | undefined;
   formParametrizacion!: FormGroup;
   modelo: any[] = [
@@ -119,7 +128,7 @@ export class ParametrizacionComponent {
 
   parametrizacionActual!: Parametrizacion;
 
-  constructor(private parametrizacionService: ParametrizacionService) {}
+  constructor(private parametrizacionService: ParametrizacionService) { }
 
   ngOnInit() {
     this.initForm();
@@ -182,5 +191,85 @@ export class ParametrizacionComponent {
           icon: 'success',
         });
       });
+  }
+
+  cargarDatos() {
+    
+    let id = "23";
+    let placa = "TUR457";
+    let nombre = "Jairo";
+    let apellido ="Meneses";
+    let foto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb89gfY0QBtcm45ilN7uJpivDncrRQYuZEp__yCLcEl3QQ5ycZCfuqhP3yFZnqx4p_bxA&usqp=CAU";
+    let cedula ="24579844";
+    let celular = "3112568974";
+    let direccion = "Calle 4 # 13-25 ";
+    let vin = "165438431";
+    let marca = "Chevrolet";
+    let vehiculo ="Corsa"
+    
+    
+    let empresas = ['Taxis del Norte', 'Coomotoristas', 'Taxis Voladores', 'Taxis Soto'];
+    let modelos = ['2012', '2020', '2013', '2010', '2021', '2019'];
+    let cilindraje = ['1400', '1600', '1800', '2000'];
+    let subsidios = [12000,14000,25000,250000,36000,50000,25000];
+
+    let taxitas: Taxista[] = [
+      {
+        apellido: apellido,
+        cedula: cedula,
+        celular: celular,
+        direccion: direccion,
+        foto: foto,
+        correo: nombre.toLowerCase()+'@gmail.com',
+        nombre: nombre,
+        id: id,
+        placa_taxi: placa,
+        placa: placa,
+        empresa: empresas[Math.floor(Math.random() * empresas.length)]
+      }
+    ];
+
+
+    let taxi: Taxi[] = [
+      {
+        marca: marca,
+        vehiculo: vehiculo,
+        vin: vin,
+        cilindraje: cilindraje[Math.floor(Math.random() * cilindraje.length)],
+        id: id,
+        modelo: modelos[Math.floor(Math.random() * modelos.length)],
+        placa: placa,
+        subsidio: subsidios[Math.floor(Math.random() * subsidios.length)]
+      }
+    ];
+
+    let infoTaxi: any[] = [
+      {
+        id: id,
+        activo: true,
+        placa: placa,
+        poliza: true,
+        rtm: true,
+        soat: true,
+        tarjeta_operacion: true,
+        poliza_contra : true, 
+        poliza_extra : true
+      }
+    ];
+
+    //console.log(taxitas[0]);
+
+   this.taxiService.registrarTaxiConId(taxi[0]).then(t => {
+      console.log('Taxi creado');
+    });
+    this.taxistaService.registrarTaxiInfoConId(infoTaxi[0]).then(t => {
+      console.log('Info Taxi creado');
+    });
+
+    this.taxistaService.registrarTaxiConId(taxitas[0]).then(a => {
+      console.log('Taxista creado');
+    });
+
+
   }
 }
