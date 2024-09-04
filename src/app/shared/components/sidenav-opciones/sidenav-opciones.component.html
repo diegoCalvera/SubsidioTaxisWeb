@@ -11,7 +11,7 @@
     <a mat-list-item class="menu-item" *ngFor="let item of menuItems()" [routerLink]="item.route"
         routerLinkActive="selected-menu-item " #rla="routerLinkActive" [activated]="rla.isActive">
         <mat-icon class="colorred" [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'"
-            matListItemIcon>{{item.icon}}</mat-icon>
+            matListItemIcon [matBadge]="item.badge">{{item.icon}}</mat-icon>
         <span matListItemTitle *ngIf="!sideNavCollapsado()">{{item.label}}</span>
     </a>
 

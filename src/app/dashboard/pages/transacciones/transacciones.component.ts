@@ -9,6 +9,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { Transaccion } from '../../../model/transaccionesDTO';
 import { TransaccionesService } from '../../../services/transacciones.service';
+import { TIPO_TRANSACCION } from '../../../../utils/enums/enums';
 
 @Component({
   selector: 'app-transacciones',
@@ -56,7 +57,7 @@ export class TransaccionesComponent {
     this.dataSource = new MatTableDataSource([] as Transaccion[]);
     this.transaccionesServicio.obtenerTodasLasTransacciones().subscribe({
       next: (p) => {
-        this.listaTransacciones = p;
+        this.listaTransacciones = p.filter(t => t.tipo_transaccion !== TIPO_TRANSACCION.RECHAZADO);
         this.listaTransacciones = this.listaTransacciones.sort(function (a, b) {
           return b.timestamp.seconds - a.timestamp.seconds;
         });

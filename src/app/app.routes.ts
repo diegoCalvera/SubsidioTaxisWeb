@@ -24,10 +24,10 @@ export const routes: Routes = [
                 path : 'parametrizacion',
                 loadComponent : () => import('./dashboard/pages/parametrizacion/parametrizacion.component').then(l => l.ParametrizacionComponent)
             },
-            /*{
+            {
                 path : 'alerta',
                 loadComponent : () => import('./dashboard/pages/alerta/alerta.component').then(l => l.AlertaComponent)
-            },*/
+            },
             {
                 path : 'transacciones',
                 loadComponent : () => import('./dashboard/pages/transacciones/transacciones.component').then(l => l.TransaccionesComponent)

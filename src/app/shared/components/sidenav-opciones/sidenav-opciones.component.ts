@@ -3,14 +3,21 @@ import { Component, Input, computed, inject, signal } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatBadgeModule } from '@angular/material/badge';
+
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { TransaccionesService } from '../../../services/transacciones.service';
+import { Transaccion } from '../../../model/transaccionesDTO';
+import { TIPO_TRANSACCION } from '../../../../utils/enums/enums';
+
 
 export type MenuItem = {
   icon: string,
   label: string,
   route: string
+  badge?: string
 }
 
 @Component({
@@ -21,6 +28,7 @@ export type MenuItem = {
     MatIconModule,
     CommonModule,
     RouterLink,
+    MatBadgeModule,
     RouterLinkActive
   ],
   templateUrl: './sidenav-opciones.component.html',
@@ -28,7 +36,33 @@ export type MenuItem = {
 })
 export class SidenavOpcionesComponent {
 
-  
+  //Servicios inyectados.
+  transaccionesServicio: TransaccionesService = inject(TransaccionesService);
+
+  //Variables   
+  listaTransacciones!: Transaccion[];
+  cantidadNotificacionesRechazadas: number = 0;
+
+
+  ngOnInit() {
+    this.transaccionesServicio.obtenerTodasLasTransacciones().subscribe({
+      next: (p) => {
+        this.listaTransacciones = p.filter(t => t.tipo_transaccion === TIPO_TRANSACCION.RECHAZADO && t.visto === false);
+        this.cantidadNotificacionesRechazadas = this.listaTransacciones.length;
+        console.log(this.listaTransacciones);
+        this.menuItems.update(items =>
+          items.
+            map(item => {
+              if (item.route === 'alerta' && this.cantidadNotificacionesRechazadas > 0) {
+                return ({ ...item, badge: `${this.cantidadNotificacionesRechazadas}` });
+              } return ({ ...item })
+            })
+        );
+      },
+    });
+  }
+
+
 
   constructor(private router: Router) { }
   sideNavCollapsado = signal(false);
@@ -45,17 +79,22 @@ export class SidenavOpcionesComponent {
     {
       icon: 'equalizer',
       label: 'Parametrización',
-      route: 'parametrizacion'
+      route: 'parametrizacion',
     },
     {
       icon: 'notifications',
       label: 'Transacciones',
-      route: 'transacciones'
+      route: 'transacciones',
     },
     {
       icon: 'flag',
       label: 'Reportes',
-      route: 'reporte'
+      route: 'reporte',
+    },
+    {
+      icon: 'flag',
+      label: 'Alertas',
+      route: 'alerta',
     },
     /*{
       icon: 'logout',

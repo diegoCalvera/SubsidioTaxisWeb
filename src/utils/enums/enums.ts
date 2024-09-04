@@ -6,3 +6,9 @@ export enum FIRESTORE_TABLES {
   PARAMETRIZACION = 'parametrizacion',
   INFO_TAXI = 'info-taxi',
 }
+
+
+
+export enum TIPO_TRANSACCION {
+  RECHAZADO = 'RECHAZO',
+}

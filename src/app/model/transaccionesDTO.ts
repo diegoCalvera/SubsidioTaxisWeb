@@ -6,4 +6,6 @@ export interface Transaccion {
     timestamp: Timestamp;
     tipo_transaccion: string;
     valor: string;
+    visto : boolean;
+    id : string;
 }
