@@ -4,5 +4,6 @@ export interface InfoTaxi {
   soat: boolean;
   tarjeta_operacion: boolean;
   activo: boolean;
-  poliza: boolean;
+  poliza_extra: boolean;
+  poliza_contra: boolean;
 }

@@ -47,3 +47,25 @@ input.example-right-align {
   align-items: center;
   margin-top: 2rem;
 }
+
+.example-small-box,
+.example-large-box {
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.inputs {
+  display: flex;
+  gap: 2rem;
+}
+
+.file-btn {
+  height: 3.5rem;
+}
+
+.file-name {
+  margin-top: 1rem;
+}

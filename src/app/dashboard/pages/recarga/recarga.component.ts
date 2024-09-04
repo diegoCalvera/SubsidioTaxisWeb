@@ -12,6 +12,7 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import Swal from 'sweetalert2';
 import { InfoTaxi } from '../../../model/info-taxi';
 import { Taxi } from '../../../model/taxiDTO';
@@ -33,6 +34,7 @@ import { TaxistaService } from '../../../services/taxista.service';
     ReactiveFormsModule,
     MatAccordion,
     MatExpansionModule,
+    MatTabsModule,
   ],
   templateUrl: './recarga.component.html',
   styleUrl: './recarga.component.css',
@@ -42,21 +44,21 @@ export class RecargaComponent {
   taxistaService: TaxistaService = inject(TaxistaService);
   taxiService: TaxiService = inject(TaxiService);
 
-  formPlaca = new FormGroup({
-    placa: new FormControl('', [Validators.required]),
-  });
+  formPlaca!: FormGroup;
+  formPlacaMasivo!: FormGroup;
   formRecarga!: FormGroup;
 
   encuentraInfomacionConPlaca: boolean = false;
   taxi: Taxi | null = null;
   taxista: Taxista | null = null;
   info_taxi: InfoTaxi | null = null;
+  srcResult: any;
+  archivo: any;
 
   ngOnInit() {
     //this.taxistaService.testGet().subscribe(e => console.log(e));
     this.construirFormulario();
     this.construirFormularioRecarga();
-    //this.buscar();
   }
 
   buscar() {
@@ -101,6 +103,9 @@ export class RecargaComponent {
     this.formPlaca = new FormGroup({
       placa: new FormControl('', [Validators.required]),
     });
+    this.formPlacaMasivo = new FormGroup({
+      valor_cargue: new FormControl('', [Validators.required]),
+    });
   }
 
   construirFormularioRecarga() {
@@ -112,7 +117,8 @@ export class RecargaComponent {
   validacionRecarga(infoTaxi: InfoTaxi) {
     if (
       infoTaxi.activo &&
-      infoTaxi.poliza &&
+      infoTaxi.poliza_contra &&
+      infoTaxi.poliza_extra &&
       infoTaxi.soat &&
       infoTaxi.rtm &&
       infoTaxi.tarjeta_operacion
@@ -177,5 +183,39 @@ export class RecargaComponent {
 
   get valorRecargaControl(): FormControl {
     return this.formRecarga.get('valor') as FormControl;
+  }
+
+  seleccionarArchivo() {
+    const inputNode: any = document.querySelector('#file');
+    this.archivo = inputNode.files[0];
+
+    if (typeof FileReader !== 'undefined') {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.srcResult = e.target.result;
+      };
+
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
+  }
+
+  cargueMasivo() {
+    if (!this.archivo) {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se ha seleccionado un archivo',
+        icon: 'error',
+      });
+      return;
+    } else {
+      Swal.fire({
+        title: 'Problema al recargar',
+        text: 'Hacen falta campos solicitados en el archivo.',
+        icon: 'info',
+      });
+      this.srcResult = null;
+      this.archivo = null;
+      this.formPlacaMasivo.reset();
+    }
   }
 }
