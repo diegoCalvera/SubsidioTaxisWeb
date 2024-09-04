@@ -7,10 +7,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
+import { TIPO_TRANSACCION } from '../../../../utils/enums/enums';
 import { Transaccion } from '../../../model/transaccionesDTO';
 import { TransaccionesService } from '../../../services/transacciones.service';
-import { TIPO_TRANSACCION } from '../../../../utils/enums/enums';
-
 
 @Component({
   selector: 'app-alerta',
@@ -26,7 +25,7 @@ import { TIPO_TRANSACCION } from '../../../../utils/enums/enums';
     MatRippleModule,
   ],
   templateUrl: './alerta.component.html',
-  styleUrl: './alerta.component.css'
+  styleUrl: './alerta.component.css',
 })
 export class AlertaComponent {
   //Servicios inyectados.
@@ -59,9 +58,13 @@ export class AlertaComponent {
     this.dataSource = new MatTableDataSource([] as Transaccion[]);
     this.transaccionesServicio.obtenerTodasLasTransacciones().subscribe({
       next: (p) => {
-        this.listaTransacciones = p.filter(t => t.tipo_transaccion == TIPO_TRANSACCION.RECHAZADO);
-        this.listaTransaccionesSinVer = this.listaTransacciones.filter(l => l.visto === false);
-        
+        this.listaTransacciones = p.filter(
+          (t) => t.tipo_transaccion == TIPO_TRANSACCION.RECHAZADO
+        );
+        this.listaTransaccionesSinVer = this.listaTransacciones.filter(
+          (l) => l.visto === false
+        );
+
         this.listaTransacciones = this.listaTransacciones.sort(function (a, b) {
           return b.timestamp.seconds - a.timestamp.seconds;
         });
@@ -70,8 +73,8 @@ export class AlertaComponent {
     });
   }
 
-  ngOnInit(){
-    this.actualizarRechazoVisto();    
+  ngOnInit() {
+    this.actualizarRechazoVisto();
   }
 
   ngAfterViewInit() {
@@ -89,17 +92,19 @@ export class AlertaComponent {
   }
 
   actualizarRechazoVisto() {
+    localStorage.setItem('visuazacionToast', 'false');
     setTimeout(() => {
-      this.listaTransaccionesSinVer = this.listaTransaccionesSinVer.map(item => ({ ...item, visto: true }));
-      console.log(this.listaTransaccionesSinVer);
-      console.log('actualizarRechazoVisto');
-      if(this.listaTransaccionesSinVer.length > 0){
-        this.listaTransaccionesSinVer.forEach(t => this.transaccionesServicio.updateTransaccion(t));
+      this.listaTransaccionesSinVer = this.listaTransaccionesSinVer.map(
+        (item) => ({ ...item, visto: true })
+      );
+      if (this.listaTransaccionesSinVer.length > 0) {
+        this.listaTransaccionesSinVer.forEach(async (t) => {
+          await this.transaccionesServicio.updateTransaccion(t);
+        });
+        setTimeout(() => {
+          localStorage.setItem('visuazacionToast', 'true');
+        }, 500);
       }
-    }, 2000);
-    /*if(this.listaTransaccionesSinVer.length > 0){
-      this.listaTransaccionesSinVer.forEach(t => this.transaccionesServicio.updateTransaccion(t));
-    }*/
+    }, 1000);
   }
-
 }

@@ -20,47 +20,28 @@ import Swal from 'sweetalert2';
   imports: [
     RouterOutlet,
     RouterLink,
-    CommonModule, MatFormFieldModule, MatSelectModule, MatButtonModule],
+    CommonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-
-
   title = 'subsidio-taxis-web';
   durationInSeconds = 5;
   private _snackBar = inject(MatSnackBar);
   //Servicios inyectados.
   transaccionesServicio: TransaccionesService = inject(TransaccionesService);
 
-  //Variables   
+  //Variables
   listaTransacciones!: Transaccion[];
-
-  toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 4000,
-  });
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  ngOnInit() {
-    this.transaccionesServicio.obtenerTodasLasTransacciones().subscribe({
-      next: (p) => {
-        this.listaTransacciones = p.filter(t => t.tipo_transaccion === TIPO_TRANSACCION.RECHAZADO && t.visto === false);
-        console.log(this.listaTransacciones);
-        if (this.listaTransacciones.length > 0) {
-          //this.openSnackBar();
-          this.toast.fire({
-            text: 'Alerta de rechazo',
-            icon: 'warning',
-          });
-        }
-      },
-    });
-  }
+  ngOnInit() {}
 
   openSnackBar() {
     this._snackBar.open('Alerta', 'Test', {
