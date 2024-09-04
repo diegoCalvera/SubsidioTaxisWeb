@@ -1,172 +1,227 @@
 <section class="title">
     <h3>Recarga de subsidio a vehículos</h3>
 </section>
-<form [formGroup]="formPlaca" (ngSubmit)="buscar()">
-    <div class="row">
-        <div class="col-sm ">
-            <mat-form-field appearance="outline">
-                <mat-label>Placa</mat-label>
-                <input matInput formControlName="placa" [maxlength]="8" (keyup)="transformToUppercase()" />
-            </mat-form-field>
+
+<mat-tab-group dynamicHeight>
+    <mat-tab label="Recarga Individual">
+        <div class="example-large-box">
+            <form [formGroup]="formPlaca" (ngSubmit)="buscar()">
+                <div class="row">
+                    <div class="col-sm ">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Placa</mat-label>
+                            <input matInput formControlName="placa" [maxlength]="8" (keyup)="transformToUppercase()" />
+                        </mat-form-field>
+                        <br>
+                        <button mat-raised-button color="primary" [disabled]="!formPlaca.valid">Buscar</button>
+                    </div>
+                </div>
+            </form>
             <br>
-            <button mat-raised-button color="primary" [disabled]="!formPlaca.valid">Buscar</button>
-        </div>
+            @if(encuentraInfomacionConPlaca){
+            <mat-accordion class="example-headers-align" multi>
+                <mat-expansion-panel expanded="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Información Personal
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col">
+                            <div class="sidenav-header">
+                                <img [src]="taxista!.foto" alt="" [width]="150" [height]="150">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"
+                                    class="with-icon"></mat-icon> <span class="informacion">{{taxista?.nombre |
+                                    uppercase}}
+                                    {{taxista?.apellido | uppercase}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                    fontIcon="badge"></mat-icon><span class="informacion">{{taxista?.cedula}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                    fontIcon="smartphone"></mat-icon> <span
+                                    class="informacion">{{taxista?.celular}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="alternate_email"
+                                    class="with-icon"></mat-icon> <span class="informacion">{{taxista?.correo}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                                <span class="informacion">{{taxista?.direccion | uppercase}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                    fontIcon="apartment"></mat-icon> <span class="informacion">{{taxista?.empresa |
+                                    uppercase}}</span>
+                            </div>
+                        </div>
 
-    </div>
-</form>
-<br>
-@if(encuentraInfomacionConPlaca){
-<mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel expanded="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Información Personal
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="row">
-            <div class="col">
-                <div class="sidenav-header">
-                    <img src="./assets/taxista.jpg" alt="" [width]="150" [height]="150">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-4">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"
-                        class="with-icon"></mat-icon> <span class="informacion">{{taxista?.nombre | uppercase}}
-                        {{taxista?.apellido | uppercase}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-4">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="badge"></mat-icon><span
-                        class="informacion">{{taxista?.cedula}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-4">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="smartphone"></mat-icon> <span
-                        class="informacion">{{taxista?.celular}}</span>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12 col-lg-4">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="alternate_email"
-                        class="with-icon"></mat-icon> <span class="informacion">{{taxista?.correo}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-4">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> <span
-                        class="informacion">{{taxista?.direccion | uppercase}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-4">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="apartment"></mat-icon> <span
-                        class="informacion">{{taxista?.empresa | uppercase}}</span>
-                </div>
-            </div>
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel expanded="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Subsidio
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
 
-        </div>
-    </mat-expansion-panel>
-    <mat-expansion-panel expanded="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Subsidio
-            </mat-panel-title>
-        </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="local_taxi"
+                                    class="with-icon"></mat-icon> <span class="informacion">{{taxi?.marca}}
+                                    {{taxi?.vehiculo}}
+                                    {{taxi?.placa}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                    fontIcon="start-rate-half"></mat-icon>
+                                <span class="informacion">Cilindraje : {{taxi?.cilindraje | uppercase}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                    fontIcon="check-small"></mat-icon>
+                                <span class="informacion">Modelo : {{taxi?.modelo | uppercase}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="paid"></mat-icon>
+                                <span class="informacion"> Subsidio : {{taxi?.subsidio | currency}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row info-taxi-section">
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <span class="informacion"
+                                    [ngClass]="info_taxi?.soat ? 'text-success' : 'text-danger'"><strong>
+                                        SOAT:</strong> {{info_taxi?.soat ? 'Vigente' : 'No Vigente'}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <span class="informacion"
+                                    [ngClass]="info_taxi?.rtm ? 'text-success' : 'text-danger'"><strong>RTM:</strong>
+                                    {{info_taxi?.rtm ? 'Vigente' : 'No Vigente'}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <span class="informacion"
+                                    [ngClass]="info_taxi?.tarjeta_operacion ? 'text-success' : 'text-danger'"><strong>T.O.:</strong>
+                                    {{info_taxi?.tarjeta_operacion ? 'Vigente' : 'No
+                                    Vigente'}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="with-icon">
+                                <span class="informacion"
+                                    [ngClass]="info_taxi?.activo ? 'text-success' : 'text-danger'"><strong>ESTADO:</strong>
+                                    {{info_taxi?.activo ? 'Activo' :
+                                    'Inactivo'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row info-taxi-section">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <span class="informacion"
+                                    [ngClass]="info_taxi?.poliza_contra ? 'text-success' : 'text-danger'"><strong>POLIZA
+                                        CONTRACTUAL:</strong>
+                                    {{info_taxi?.poliza_contra ? 'Vigente' : 'No
+                                    Vigente'}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="with-icon">
+                                <span class="informacion"
+                                    [ngClass]="info_taxi?.poliza_extra ? 'text-success' : 'text-danger'"><strong>POLIZA
+                                        EXTRACONTRACTUAL:</strong>
+                                    {{info_taxi?.poliza_extra ? 'Vigente' : 'No
+                                    Vigente'}}</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="row">
-            <div class="col-md-12 col-lg-3">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="local_taxi"
-                        class="with-icon"></mat-icon> <span class="informacion">{{taxi?.marca}} {{taxi?.vehiculo}}
-                        {{taxi?.placa}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-3">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="start-rate-half"></mat-icon>
-                    <span class="informacion">Cilindraje : {{taxi?.cilindraje | uppercase}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-3">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="check-small"></mat-icon>
-                    <span class="informacion">Modelo : {{taxi?.modelo | uppercase}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-3">
-                <div class="with-icon">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="paid"></mat-icon>
-                    <span class="informacion"> Subsidio : {{taxi?.subsidio | currency}}</span>
-                </div>
-            </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <form [formGroup]="formRecarga" (ngSubmit)="recargar()">
+                            <div class="col-sm">
+                                <mat-form-field appearance="outline" floatLabel="always">
+                                    <mat-label>Valor a recargar</mat-label>
+                                    <input matInput formControlName="valor" type="number" class="example-right-align"
+                                        placeholder="0">
+                                    <span matTextPrefix>$&nbsp;</span>
+                                    <span matTextSuffix>.00</span>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <button mat-raised-button color="primary"
+                                    [disabled]="!formRecarga.valid">Recargar</button>
+                            </div>
+                        </form>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            }
         </div>
-        <div class="row info-taxi-section">
-            <div class="col-md-12 col-lg-2">
-                <div class="with-icon">
-                    <span class="informacion" [ngClass]="info_taxi?.soat ? 'text-success' : 'text-danger'"><strong>
-                            SOAT:</strong> {{info_taxi?.soat ? 'Vigente' : 'No Vigente'}}
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-2">
-                <div class="with-icon">
-                    <span class="informacion"
-                        [ngClass]="info_taxi?.rtm ? 'text-success' : 'text-danger'"><strong>RTM:</strong>
-                        {{info_taxi?.rtm ? 'Vigente' : 'No Vigente'}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-2">
-                <div class="with-icon">
-                    <span class="informacion"
-                        [ngClass]="info_taxi?.poliza ? 'text-success' : 'text-danger'"><strong>POLIZA:</strong>
-                        {{info_taxi?.poliza ? 'Vigente' : 'No
-                        Vigente'}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-2">
-                <div class="with-icon">
-                    <span class="informacion"
-                        [ngClass]="info_taxi?.tarjeta_operacion ? 'text-success' : 'text-danger'"><strong>T.O.:</strong>
-                        {{info_taxi?.tarjeta_operacion ? 'Vigente' : 'No
-                        Vigente'}}</span>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-2">
-                <div class="with-icon">
-                    <span class="informacion"
-                        [ngClass]="info_taxi?.activo ? 'text-success' : 'text-danger'"><strong>ESTADO:</strong>
-                        {{info_taxi?.activo ? 'Activo' :
-                        'Inactivo'}}</span>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <br>
-        <div class="row">
-            <form [formGroup]="formRecarga" (ngSubmit)="recargar()">
-                <div class="col-sm">
-                    <mat-form-field appearance="outline" floatLabel="always">
-                        <mat-label>Valor a recargar</mat-label>
-                        <input matInput formControlName="valor" type="number" class="example-right-align"
-                            placeholder="0">
-                        <span matTextPrefix>$&nbsp;</span>
-                        <span matTextSuffix>.00</span>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm">
-                    <button mat-raised-button color="primary" [disabled]="!formRecarga.valid">Recargar</button>
+    </mat-tab>
+    <mat-tab label="Recarga Masiva">
+        <div class="example-large-box">
+            <form [formGroup]="formPlacaMasivo">
+                <div class="row">
+                    <div class="col-sm">
+                        <section class="inputs">
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>Valor a recargar</mat-label>
+                                <input matInput formControlName="valor_cargue" type="number" class="example-right-align"
+                                    placeholder="0">
+                                <span matTextPrefix>$&nbsp;</span>
+                                <span matTextSuffix>.00</span>
+                            </mat-form-field>
+                            <button type="button" class="file-btn" mat-raised-button color="primary"
+                                (click)="fileInput.click()">
+                                Seleccione archivo
+                            </button>
+                            <input hidden (change)="seleccionarArchivo()" #fileInput type="file" id="file"
+                                accept=".xls, .xlsx, .csv">
+                            <span class="file-name"><strong> {{archivo?.name}} </strong></span>
+                        </section>
+                        <br>
+                        <button mat-raised-button color="primary" (click)="cargueMasivo()"
+                            [disabled]="!formPlacaMasivo.valid">Cargar Masivamente</button>
+                    </div>
                 </div>
             </form>
         </div>
-    </mat-expansion-panel>
-</mat-accordion>
-}
+    </mat-tab>
+</mat-tab-group>
