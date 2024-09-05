@@ -101,10 +101,10 @@ export class AlertaComponent {
         this.listaTransaccionesSinVer.forEach(async (t) => {
           await this.transaccionesServicio.updateTransaccion(t);
         });
-        setTimeout(() => {
-          localStorage.setItem('visuazacionToast', 'true');
-        }, 500);
       }
+      setTimeout(() => {
+        localStorage.setItem('visuazacionToast', 'true');
+      }, 500);
     }, 1000);
   }
 }
